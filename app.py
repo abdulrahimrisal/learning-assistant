@@ -141,3 +141,22 @@ if prompt := st.chat_input("Ask a question about your materials..."):
                 st.session_state.messages.append({"role": "assistant", "content": full_response})
             except Exception as e:
                 st.error(f"Error generating response: {e}")
+import time
+
+# Wrap your API call in a loop
+for attempt in range(3):
+    try:
+        response = client.models.generate_content(
+            model='gemini-2.5-flash',
+            contents=[...],
+            # ... include your config and system instructions here
+        )
+        break # If successful, break out of the loop
+    except Exception as e:
+        if "503" in str(e) and attempt < 2:
+            # If it's a 503, wait a bit before trying again
+            time.sleep(2) 
+        else:
+            # If it's a different error, or we ran out of retries, show it
+            st.error(f"Error generating response: {e}")
+            break
