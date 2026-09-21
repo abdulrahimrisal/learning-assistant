@@ -16,9 +16,6 @@ LOCATION = os.environ.get("GOOGLE_CLOUD_LOCATION")
 @st.cache_resource
 def get_gemini_client():
     if not PROJECT_ID or not LOCATION:
-        st.error("GOOGLE_CLOUD_PROJECT and GOOGLE_CLOUD_LOCATION must be set in .env")
-        return None
-    try:
         return genai.Client(
             vertexai=True,
             project=PROJECT_ID,
