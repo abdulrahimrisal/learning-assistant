@@ -127,7 +127,7 @@ if prompt := st.chat_input("Ask a question about your materials..."):
             try:
                 # Using gemini-3.5-pro
                 response_stream = client.models.generate_content_stream(
-                    model="gemini-3.1-pro",
+                    model="gemini-3.6-flash",
                     contents=current_turn_parts,
                     config=config
                 )
